@@ -41,6 +41,10 @@ $router->add('/registro/vacuna', function () {
     $opcion='reg';
     require_once("controlador/controladorvacuna.php");
 });
+$router->add('/registro/fisicoquimicos', function () {
+    $opcion='reg';
+    require_once("controlador/controladorfisicoquim.php");
+});
 $router->add('/reportes/registro', function () {
     $opcion='reg';
     require_once("controlador/controladorreportes.php");

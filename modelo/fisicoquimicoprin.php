@@ -4,16 +4,16 @@ class fisicoquimiprin_modelo{
     private $fisicoquimiprin;
     private $fisicoquimiprin2;
     /*
-    LA TABLAS DE PRINCIPAL_DEL_REPORTES ES APP2_M52S_PR3N
+    LA TABLAS DE FISICOQUIMICOS_PRINCIPAL ES APP0_F3Q3_PR3N
     ID:int /not null
     IDEMP:int /not null
     IDGRA:int /not null
     NORC:int /not null
-    LOTE:int /not null
     FECHA:Datetime/not null
-    TIPO:nvarchar(50)/not null
-    ANEXO:nvarchar(50)/not null
+    HORA:time(7)/not null
+    CODESPA:nvarchar(5)/not null
     RESPONSABLE:int/not null
+    ANEXO:nvarchar(50)/not null
     OBSERVA:nvarchar(300)/not null
     USUARIO:int/not null
     TEMPORAL:Datetime/not null
@@ -22,36 +22,36 @@ class fisicoquimiprin_modelo{
     */
     public function __construct(){
         $this->db=Conectar::conexion();
-        $this->prinrep=array();
-        $this->prinrep2=array();
+        $this->fisicoquimiprin=array();
+        $this->fisicoquimiprin2=array();
     }
     public function getNumeroNORC($IDEMP,$IDGRA){
-        $sql = "SELECT MAX(NORC) as Maximo FROM APP2_M52S_PR3N WHERE IDEMP='".strval($IDEMP)."' AND IDGRA='".strval($IDGRA)."'";
+        $sql = "SELECT MAX(NORC) as Maximo FROM APP0_F3Q3_PR3N WHERE IDEMP='".strval($IDEMP)."' AND IDGRA='".strval($IDGRA)."'";
         $stmt = sqlsrv_query(  $this->db, $sql );
         if( $stmt === false) {
             die( print_r( sqlsrv_errors(), true) );
         }
         
         while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
-            array_push($this->prinrep2,$row);
+            array_push($this->fisicoquimiprin2,$row);
         }
-        return $this->prinrep2[0]['Maximo']+1;
+        return $this->fisicoquimiprin2[0]['Maximo']+1;
     }
-    public function reg_prinreport($IDEMP,$IDGRA,$LOTE,$FECHA,$TIPO,$ANEXO,$RESPONSABLE,$OBSERVA,$USUARIO){
+    public function reg_fisicoprin($IDEMP,$IDGRA,$FECHA,$HORA,$CODESPA,$RESPONSABLE,$ANEXO,$OBSERVA,$USUARIO){
   
-        $sql = "SELECT MAX(ID) as Maximo FROM APP2_M52S_PR3N";
+        $sql = "SELECT MAX(ID) as Maximo FROM APP0_F3Q3_PR3N";
         $stmt = sqlsrv_query(  $this->db, $sql );
         if( $stmt === false) {
             die( print_r( sqlsrv_errors(), true) );
         }
         
         while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
-            array_push($this->prinrep,$row);
+            array_push($this->fisicoquimiprin,$row);
         }
-       $valorMaximo=$this->prinrep[0]['Maximo']+1;
+       $valorMaximo=$this->fisicoquimiprin[0]['Maximo']+1;
        $valorNORC=$this->getNumeroNORC($IDEMP,$IDGRA);
-       $sql = "INSERT INTO APP2_M52S_PR3N ( IDEMP,IDGRA,NORC,LOTE,FECHA,TIPO,ANEXO,RESPONSABLE,OBSERVA,USUARIO,TEMPORAL,ACTIVO,VERSIONES) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-       $params = array( $IDEMP,$IDGRA,$valorNORC,$LOTE,$FECHA,$TIPO,$ANEXO,$RESPONSABLE,$OBSERVA,$USUARIO, date("Y-m-d H:i:s"), '1', '1');
+       $sql = "INSERT INTO APP0_F3Q3_PR3N ( IDEMP,IDGRA,NORC,FECHA,HORA,CODESPA,ANEXO,RESPONSABLE,OBSERVA,USUARIO,TEMPORAL,ACTIVO,VERSIONES) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+       $params = array( $IDEMP,$IDGRA,$valorNORC,$FECHA,$HORA,$CODESPA,$ANEXO,$RESPONSABLE,$OBSERVA,$USUARIO, date("Y-m-d H:i:s"), '1', '1');
 
        $stmt = sqlsrv_query( $this->db, $sql, $params);
         if( $stmt === false) {
