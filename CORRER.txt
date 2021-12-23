@@ -1,0 +1,3 @@
+php -s localhost:8080 router.php PARA QUE CORRA
+
+si me da error el sqlsrv revizar odbc
