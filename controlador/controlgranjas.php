@@ -15,6 +15,14 @@ if($opcion=='getgranjas'){
         echo json_encode($ValorRetorno);
     }
     
+}else if($opcion=='getespacioscod'){
+    if(empty($IDEMP) || empty($IDGRA)){
+        echo "Error";
+    }else{
+        $ValorRetorno=array("espacios"=>$granjas->get_espaciosWithCod($IDEMP,$IDGRA));
+        echo json_encode($ValorRetorno);
+    }
+    
 }else if (!isset($valorUso) && $opcion=='reg'){
     //Pagina de ingreso para el registro de GRANJAS
 }

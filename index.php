@@ -29,6 +29,11 @@ $router->add('/espacios/([0-9]*)/([0-9]*)', function ($IDEMP,$IDGRA) {
     $opcion='getespacios';
     require_once("controlador/controlgranjas.php");
 });
+$router->add('/espacioscod/([0-9]*)/([0-9]*)', function ($IDEMP,$IDGRA) {
+    $opcion='getespacioscod';
+    require_once("controlador/controlgranjas.php");
+});
+
 $router->add('/responsable', function () {
     $opcion='getresponsable';
     require_once("controlador/controladorresponsable.php");
@@ -43,6 +48,10 @@ $router->add('/registro/vacuna', function () {
 });
 $router->add('/registro/fisicoquimicos', function () {
     $opcion='reg';
+    require_once("controlador/controladorfisicoquim.php");
+});
+$router->add('/fisicoquimicos/parametros', function () {
+    $opcion='getfisicoquimicosparam';
     require_once("controlador/controladorfisicoquim.php");
 });
 $router->add('/reportes/registro', function () {

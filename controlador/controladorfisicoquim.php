@@ -1,8 +1,10 @@
 <?php
 //Llamada al modelo del reportes
 require_once("modelo/fisicoquimicoprin.php");
+require_once("modelo/parametrosfisicoquimicos.php");
 require_once("modelo/fisicoquimicodet.php");
 $fisicoquimicoprin=new fisicoquimiprin_modelo(); 
+$paramfis=new paramfisico_modelo(); 
 $fisicoquimicodeta=new fisicoquimidet_modelo(); 
 
 //Validacion para uso de algunas funciones especificas
@@ -51,6 +53,9 @@ if (!isset($valorUso) && $opcion=='reg'){
     $retorno=array("Principal"=>$valorprincipal,"DetalleCuenta"=>$contado);
     echo json_encode($retorno);
 
+}else if($opcion=='getfisicoquimicosparam'){
+    $ValorRetorno=array("parametros"=>$paramfis->get_paramfisico());
+    echo json_encode($ValorRetorno);
 }
 
 ?>
