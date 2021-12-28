@@ -27,23 +27,7 @@ if (!isset($valorUso) && $opcion=='reg'){
     $NORC=$valorprincipal['NORC'];
     $contado=0;
     for ($i = 0; $i < count($DATADETA); $i++) {
-        if($DATADETA[$i]['variable']=='Tipo1'){
-            $VARIABLE='Temperatura (Cº)';
-        }else if($DATADETA[$i]['variable']=='Tipo2'){
-            $VARIABLE='Alcalinidad total';
-        }else if($DATADETA[$i]['variable']=='Tipo3'){
-            $VARIABLE='Turbidez';
-        }else if($DATADETA[$i]['variable']=='Tipo4'){
-            $VARIABLE='Dureza total';
-        }else if($DATADETA[$i]['variable']=='Tipo5'){
-            $VARIABLE='Oxigeno Disuelto';
-        }else if($DATADETA[$i]['variable']=='Tipo6'){
-            $VARIABLE='Nitritos';
-        }else if($DATADETA[$i]['variable']=='Tipo7'){
-            $VARIABLE='Amonio Total';
-        }else if($DATADETA[$i]['variable']=='Tipo8'){
-            $VARIABLE='PH';
-        }
+        $VARIABLE=$DATADETA[$i]['variable'];
         $VALOR=(float)$DATADETA[$i]['valor'];
         $valorsecundario=$fisicoquimicodeta->reg_fisicodeta($IDEMP,$IDGRA,$NORC,$VARIABLE,$VALOR);
         if($valorsecundario['paso']){
