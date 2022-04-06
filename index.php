@@ -33,7 +33,10 @@ $router->add('/espacioscod/([0-9]*)/([0-9]*)', function ($IDEMP,$IDGRA) {
     $opcion='getespacioscod';
     require_once("controlador/controlgranjas.php");
 });
-
+$router->add('/espacioscod', function () {
+    $opcion='getespaciosall';
+    require_once("controlador/controlgranjas.php");
+});
 $router->add('/responsable', function () {
     $opcion='getresponsable';
     require_once("controlador/controladorresponsable.php");

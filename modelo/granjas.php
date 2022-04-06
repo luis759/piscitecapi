@@ -43,6 +43,20 @@ class granjas_modelo{
         }
         return $this->granjas;
     }
+    
+    public function get_espaciosWithCodAll(){
+        $sql = "SELECT COD,NOMBRE,IDEMP,IDGRA  FROM APP0_2SP1_D2T1 where activo=1";
+        $stmt = sqlsrv_query(  $this->db, $sql );
+        if( $stmt === false) {
+            die( print_r( sqlsrv_errors(), true) );
+        }
+        
+        while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
+            array_push($this->granjas,$row);
+        }
+        return $this->granjas;
+    }
+
     public function get_granjas(){
         $sql = "SELECT * FROM APP3_GR1N where activo = '1'";
         $stmt = sqlsrv_query(  $this->db, $sql );
