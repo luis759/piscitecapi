@@ -65,6 +65,25 @@ $router->add('/granjas', function () {
     $opcion='getgranjas';
     require_once("controlador/controlgranjas.php");
 });
+$router->add('/materias/get', function () {
+    $opcion='getmaterias';
+    require_once("controlador/controladorconsumos.php");
+});
+
+$router->add('/consumos', function () {
+    $opcion='reg';
+    require_once("controlador/controladorconsumos.php");
+});
+
+$router->add('/mortalidad/getcausas', function () {
+    $opcion='getcausas';
+    require_once("controlador/controladormortalidad.php");
+});
+
+$router->add('/mortalidad', function () {
+    $opcion='reg';
+    require_once("controlador/controladormortalidad.php");
+});
 //Ruta de LLamada para las paginas que no se encuentran
 $router->add('/.*', function () {
   echo "NO SE PUEDE INGRESAR";
