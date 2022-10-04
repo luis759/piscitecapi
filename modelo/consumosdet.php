@@ -21,6 +21,7 @@ class consumosdet_modelo{
     public function __construct(){
         $this->db=Conectar::conexion();
         $this->consumos=array();
+        $this->consumos2=array();
     }
     public function reg_conumosdet($IDEMP,$IDGRA,$NORC,$CODESPA,$LOTE,$CANTIDAD,$CODIGO,$LOTEMP,$OBSERVA){
   

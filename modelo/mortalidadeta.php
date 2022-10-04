@@ -21,7 +21,8 @@ class mortalidaddeta_modelo{
     */
     public function __construct(){
         $this->db=Conectar::conexion();
-        $this->consumos=array();
+        $this->mortalidad=array();
+        $this->mortalidad2=array();
     }
     public function reg_mortalidaddet($IDEMP,$IDGRA,$NORC,$CODESPA,$LOTE,$CANTAM,$KILOSAM,$CANTPM,$KILOSPM,$OBSERVA,$CAUSA){
   

@@ -20,9 +20,11 @@ class mortalidadprin_modelo{
     public function __construct(){
         $this->db=Conectar::conexion();
         $this->mortalidad=array();
+        $this->mortalidaddata=array();
+        $this->mortalidad2=array();
     }
   public function get_allcausas(){
-        $sql = "SELECT *  FROM APP6_M4RT_C15S where ACTIVO=1";
+        $sql = "SELECT *  FROM APP6_M4RT_C15S";
         $stmt = sqlsrv_query(  $this->db, $sql );
         if( $stmt === false) {
             die( print_r( sqlsrv_errors(), true) );

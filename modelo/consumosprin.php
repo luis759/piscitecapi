@@ -20,9 +20,11 @@ class consumosprin_modelo{
     public function __construct(){
         $this->db=Conectar::conexion();
         $this->consumos=array();
+        $this->materia=array();
+        $this->consumos2=array();
     }
   public function get_AllMaterias(){
-        $sql = "SELECT *  FROM APP0_1L3M where ACTIVO=1";
+        $sql = "SELECT *  FROM APP0_1L3M where ACTIVO='1'";
         $stmt = sqlsrv_query(  $this->db, $sql );
         if( $stmt === false) {
             die( print_r( sqlsrv_errors(), true) );
