@@ -60,7 +60,7 @@ class mortalidadprin_modelo{
         }
        $valorMaximo=$this->mortalidad[0]['Maximo']+1;
        $valorNORC=$this->getNumeroNORC($IDEMP,$IDGRA);
-       $sql = "INSERT INTO APP6_M4RT_PR3N ( IDEMP,IDGRA,NORC,FECHA,RESPONSABLE,OBSERVA,USUARIO,TEMPORAL,ACTIVO,VERSIONES) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+       $sql = "INSERT INTO APP6_M4RT_PR3N ( IDEMP,IDGRA,NORC,FECHA,RESPONSABLE,OBSERVACION,USUARIO,TEMPORAL,ACTIVO,VERSIONES) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
        $params = array( $IDEMP,$IDGRA,$valorNORC,$FECHA,$RESPONSABLE,$OBSERVA,$USUARIO, date("Y-m-d H:i:s"), '1', '1');
 
        $stmt = sqlsrv_query( $this->db, $sql, $params);
