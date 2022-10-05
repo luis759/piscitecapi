@@ -37,6 +37,11 @@ $router->add('/espacioscod', function () {
     $opcion='getespaciosall';
     require_once("controlador/controlgranjas.php");
 });
+$router->add('/espacioscodlote', function () {
+    $opcion='getespaciosalllote';
+    require_once("controlador/controlgranjas.php");
+});
+
 $router->add('/responsable', function () {
     $opcion='getresponsable';
     require_once("controlador/controladorresponsable.php");
