@@ -36,7 +36,7 @@ class consumosprin_modelo{
         return $this->materia;
     }
     public function getNumeroNORC($IDEMP,$IDGRA){
-        $sql = "SELECT MAX(NORC) as Maximo FROM APP6_C4NS_PR3N WHERE IDEMP='".strval($IDEMP)."' AND IDGRA='".strval($IDGRA)."'";
+        $sql = "SELECT MAX(NORC) as Maximo FROM APP6_C4NS_PR3N WHERE IDEMP='".strval($IDEMP)."'";
         $stmt = sqlsrv_query(  $this->db, $sql );
         if( $stmt === false) {
             die( print_r( sqlsrv_errors(), true) );
