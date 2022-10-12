@@ -20,7 +20,7 @@ class permisos_modelo{
         $this->permisos=array();
     }
     public function get_permisos(){
-        $sql = "SELECT * FROM ACO_1SS1 where  activo = '1' and idmod = '2' and IdHoja = '12'";
+        $sql = "SELECT * FROM ACO_1SS1 where  activo = '1'";
         $stmt = sqlsrv_query(  $this->db, $sql );
         if( $stmt === false) {
             die( print_r( sqlsrv_errors(), true) );
