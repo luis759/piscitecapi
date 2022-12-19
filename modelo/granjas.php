@@ -57,7 +57,7 @@ class granjas_modelo{
         return $this->granjas;
     }
     public function get_espaciosWithCodAllLOTE(){
-        $sql = "SELECT * FROM dbo.APP2_L4T2_BY_2SP1_TOT(1)";
+        $sql = "SELECT * FROM dbo.APP2_L4T2_BY_2SP1_TOT(1) where LOTE is not  null";
         $stmt = sqlsrv_query(  $this->db, $sql );
         if( $stmt === false) {
             die( print_r( sqlsrv_errors(), true) );
