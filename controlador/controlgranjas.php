@@ -29,6 +29,10 @@ if($opcion=='getgranjas'){
 }else if($opcion=='getespaciosalllote'){
     $ValorRetorno=array("espacios"=>$granjas->get_espaciosWithCodAllLOTE());
     echo json_encode($ValorRetorno);    
+    
+}else if($opcion=='getespaciobycodigo'){
+    $ValorRetorno=array("espacios"=>$granjas->getAllInfoCodigoEspacios());
+    echo json_encode($ValorRetorno); 
 }else if (!isset($valorUso) && $opcion=='reg'){
     //Pagina de ingreso para el registro de GRANJAS
 }

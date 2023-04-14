@@ -41,6 +41,10 @@ $router->add('/espacioscodlote', function () {
     $opcion='getespaciosalllote';
     require_once("controlador/controlgranjas.php");
 });
+$router->add('/espaciocodigobyempresa', function () {
+    $opcion='getespaciobycodigo';
+    require_once("controlador/controlgranjas.php");
+});
 
 $router->add('/responsable', function () {
     $opcion='getresponsable';
