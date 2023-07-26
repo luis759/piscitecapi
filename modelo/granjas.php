@@ -45,7 +45,7 @@ class granjas_modelo{
     }
     
     public function get_espaciosWithCodAll(){
-        $sql = "SELECT COD,NOMBRE,IDEMP,IDGRA  FROM APP0_2SP1_D2T1 where activo=1";
+        $sql = "SELECT COD,NOMBRE,IDEMP,IDGRA  FROM APP0_2SP1_D2T1 where activo=1 ORDER BY NOMBRE ASC";
         $stmt = sqlsrv_query(  $this->db, $sql );
         if( $stmt === false) {
             die( print_r( sqlsrv_errors(), true) );
@@ -57,7 +57,7 @@ class granjas_modelo{
         return $this->granjas;
     }
     public function get_espaciosWithCodAllLOTE(){
-        $sql = "SELECT * FROM dbo.APP0_2SP1_L3ST(1)";
+        $sql = "SELECT * FROM dbo.APP0_2SP1_L3ST(1) ORDER BY NOMBRE ASC";
         $stmt = sqlsrv_query(  $this->db, $sql );
         if( $stmt === false) {
             die( print_r( sqlsrv_errors(), true) );
@@ -69,7 +69,7 @@ class granjas_modelo{
         return $this->granjas;
     }
     public function getAllInfoCodigoEspacios(){
-        $sql = "SELECT * FROM dbo.APP2_L4T2_BY_2SP1_TOT(1)";
+        $sql = "SELECT * FROM dbo.APP2_L4T2_BY_2SP1_TOT(1) ORDER BY NOMBRE ASC";
         $stmt = sqlsrv_query(  $this->db, $sql );
         if( $stmt === false) {
             die( print_r( sqlsrv_errors(), true) );
