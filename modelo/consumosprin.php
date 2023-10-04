@@ -24,7 +24,7 @@ class consumosprin_modelo{
         $this->consumos2=array();
     }
   public function get_AllMaterias(){
-        $sql = "SELECT *  FROM APP0_1L3M where ACTIVO='1'";
+        $sql = "SELECT * FROM dbo.APP0_1L3M_L3ST(1)";
         $stmt = sqlsrv_query(  $this->db, $sql );
         if( $stmt === false) {
             die( print_r( sqlsrv_errors(), true) );
@@ -69,6 +69,18 @@ class consumosprin_modelo{
         }else{
             return array("UltimoId"=>$valorMaximo,"NORC"=>$valorNORC,"Paso"=>true);
         }
+    }
+    public function get_materias(){
+        $sql = "SELECT * FROM dbo.APP0_1L3M_L3ST(1)";
+        $stmt = sqlsrv_query(  $this->db, $sql );
+        if( $stmt === false) {
+            die( print_r( sqlsrv_errors(), true) );
+        }
+        
+        while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
+            array_push($this->consumos,$row);
+        }
+        return $this->consumos;
     }
 }
 ?>

@@ -2,11 +2,11 @@
 class Conectar{
               
          public static function conexion(){
-                $serverName = "tcp:piscitec2.database.windows.net,1433"; // update me
+                $serverName = "tcp:statisticsfishco.database.windows.net,1433"; // update me
                 $connectionOptions = array(
-                    "Database" => "P3SC3T2C", // update me
+                    "Database" => "PISCITEC", // update me
                      "Uid" => "excapps", // update me
-                     "PWD" => "Anka*2015",
+                     "PWD" => 'kOE%e*M@2^Y5WL0a',
                      "CharacterSet" => "UTF-8" // update me
                  );
             //Establishes the connection
