@@ -35,6 +35,18 @@ class consumosprin_modelo{
         }
         return $this->materia;
     }
+    public function consultadieta($IDEMP,$IDGRA,$CODESPA){
+        $sql = "SELECT CANTIDAD, PRODUCTO FROM dbo.APP4_CONSULTA_DIETA('".strval($IDEMP)."','".strval($IDGRA)."','".strval($CODESPA)."')";
+        $stmt = sqlsrv_query(  $this->db, $sql );
+        if( $stmt === false) {
+            die( print_r( sqlsrv_errors(), true) );
+        }
+        
+        while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
+            array_push($this->materia,$row);
+        }
+        return $this->materia; 
+    }
     public function getNumeroNORC($IDEMP,$IDGRA){
         $sql = "SELECT MAX(NORC) as Maximo FROM APP6_C4NS_PR3N WHERE IDEMP='".strval($IDEMP)."'";
         $stmt = sqlsrv_query(  $this->db, $sql );

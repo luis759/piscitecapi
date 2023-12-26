@@ -69,7 +69,7 @@ class granjas_modelo{
         return $this->granjas;
     }
     public function getAllInfoCodigoEspacios(){
-        $sql = "SELECT * FROM dbo.APP2_L4T2_BY_2SP1_TOT(1) ORDER BY NOMBRE ASC";
+        $sql = "SELECT * FROM dbo.APP2_L4T2_BY_2SP1_TOT(1) ORDER BY NOMBRE ASC ";
         $stmt = sqlsrv_query(  $this->db, $sql );
         if( $stmt === false) {
             die( print_r( sqlsrv_errors(), true) );
