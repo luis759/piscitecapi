@@ -35,8 +35,8 @@ class consumosprin_modelo{
         }
         return $this->materia;
     }
-    public function consultadieta($IDEMP,$IDGRA,$CODESPA){
-        $sql = "SELECT CANTIDAD, PRODUCTO FROM dbo.APP4_CONSULTA_DIETA('".strval($IDEMP)."','".strval($IDGRA)."','".strval($CODESPA)."')";
+    public function consultadieta(){
+        $sql = "SELECT * FROM dbo.APP0_D32T_DIARIA(1)";
         $stmt = sqlsrv_query(  $this->db, $sql );
         if( $stmt === false) {
             die( print_r( sqlsrv_errors(), true) );

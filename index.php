@@ -83,11 +83,14 @@ $router->add('/consumos', function () {
     $opcion='reg';
     require_once("controlador/controladorconsumos.php");
 });
-$router->add('/consumos/consultadieta/([0-9]*)/([0-9]*)/([a-zA-Z0-9]*)', function ($IDEMP,$IDGRA,$CODESPA) {
+$router->add('/consumos/consultadieta', function () {
     $opcion='consultadieta';
     require_once("controlador/controladorconsumos.php");
 });
-
+$router->add('/versionAPP', function () {
+    $opcion='getversion';
+    require_once("controlador/controladorversionapp.php");
+});
 $router->add('/mortalidad/getcausas', function () {
     $opcion='getcausas';
     require_once("controlador/controladormortalidad.php");

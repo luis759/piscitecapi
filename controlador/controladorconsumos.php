@@ -36,7 +36,7 @@ if (!isset($valorUso) && $opcion=='reg'){
     $ValorRetorno=array("materias"=>$consumosprin->get_AllMaterias());
     echo json_encode($ValorRetorno);
 }else if($opcion=='consultadieta'){
-    $ValorRetorno=array("consultadieta"=>$consumosprin->consultadieta($IDEMP,$IDGRA,$CODESPA));
+    $ValorRetorno=array("consultadieta"=>$consumosprin->consultadieta());
     echo json_encode($ValorRetorno);
 }
 
