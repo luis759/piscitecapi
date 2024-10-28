@@ -92,8 +92,8 @@ function ArreglarInfoGet($Array) {
     $usuraio=$fisicoquimicoprin->getDeviceID($deviceID);
     $Parametro=$datoInfo['sensorId'];
     $ParametroName=$fisicoquimicoprin->getParametroID($Parametro);
-    $fecha=date('Y-m-d',$datoInfo['sensorId']);
-    $hora=date('H:i:s',$datoInfo['sensorId']);
+    $fecha=date('Y-m-d',$datoInfo['timestamp']);
+    $hora=date('H:i:s',$datoInfo['timestamp']);
     $valor=$datoInfo['value'];
     $arrayRetorno=UnidadesDeProduccion($Unidades,$CentroProduccion,$ParametroName['PARAMETRO'],$fecha,$hora,$valor, $usuraio['USUARIO']);
     return $arrayRetorno;
