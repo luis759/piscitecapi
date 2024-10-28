@@ -57,6 +57,7 @@ class saldorep_modelo{
        $stmt = sqlsrv_query( $this->db, $sql, $params);
         if( $stmt === false) {
             die( print_r( sqlsrv_errors(), true) );
+            file_put_contents("Error.txt", sqlsrv_errors());
         }
         
         }

@@ -1,5 +1,5 @@
 <?php
-//require_once("db/db.php");
+require_once("db/db.php");
 include 'src/Router/Route.php';
 include 'src/Router/Router.php';
 include 'src/Router/RouteNotFoundException.php';
@@ -67,7 +67,7 @@ $router->add('/fisicoquimicos/parametros', function () {
     $opcion='getfisicoquimicosparam';
     require_once("controlador/controladorfisicoquim.php");
 });
-$router->add('/api/fisicoquimicos/registroWebhook', function () {
+$router->add('/api/fisicoquimicos/registrohook', function () {
     $opcion='registroWebhook';
     $isAPi=true;
     require_once("controlador/controladorfisicoquim.php");

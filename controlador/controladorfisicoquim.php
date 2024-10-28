@@ -1,11 +1,11 @@
 <?php
 //Llamada al modelo del reportes
-/*require_once("modelo/fisicoquimicoprin.php");
+require_once("modelo/fisicoquimicoprin.php");
 require_once("modelo/parametrosfisicoquimicos.php");
 require_once("modelo/fisicoquimicodet.php");
 $fisicoquimicoprin=new fisicoquimiprin_modelo(); 
 $paramfis=new paramfisico_modelo(); 
-$fisicoquimicodeta=new fisicoquimidet_modelo(); */
+$fisicoquimicodeta=new fisicoquimidet_modelo(); 
 
 //Validacion para uso de algunas funciones especificas
 if (!isset($valorUso) && $opcion=='reg' && !isset($isAPi)){
@@ -43,33 +43,74 @@ if (!isset($valorUso) && $opcion=='reg' && !isset($isAPi)){
 }else if ($opcion=='registroWebhook' && isset($isAPi)){
 header('Content-type: application/json');
 $data = json_decode(file_get_contents('php://input'), true);
-print_r(ArreglarInfoGet($data));
+if(isset($data)){
+    $dataAcomodada=ArreglarInfoGet($data);
+$arregloCorrecto=[];
+foreach ($dataAcomodada as &$valor) {
+    foreach ($valor as &$valor2) {
+        $datausqueda=array_search($valor2['CODESPA'],array_column($arregloCorrecto, 'CODESPA'));
+      
+        if(!empty($datausqueda) || $datausqueda===0){
+            array_push( $arregloCorrecto[$datausqueda]['data'],$valor2);
+        }else{
+        
+            array_push( $arregloCorrecto,array('CODESPA'=>$valor2['CODESPA'],'IDEMP'=>$valor2['IDEMP'],'IDGRA'=>$valor2['IDGRA'],'usuario'=>$valor2['usuario'],'fecha'=>$valor2['fecha'],'hora'=>$valor2['hora'],'data'=>array($valor2)));
+        }
+    }
+}
+$notasNORC=array();
+foreach($arregloCorrecto as &$valor){
+    $IDEMP=$valor['IDEMP'];
+    $IDGRA=$valor['IDGRA'];
+    $CODESPA=$valor['CODESPA'];
+    $FECHA=$valor['fecha'];
+    $HORA=$valor['hora'];
+    $RESPONSABLE=NULL;
+    $ANEXO=NULL;
+    $OBSERVA="Registro de Medusa";  
+    $USUARIO=$valor['usuario'];
+    $valorprincipal=$fisicoquimicoprin->reg_fisicoprin($IDEMP,$IDGRA,$FECHA,$HORA,$CODESPA,$RESPONSABLE,$ANEXO,$OBSERVA,$USUARIO);
+    $NORC=$valorprincipal['NORC'];
+    array_push($notasNORC,$valorprincipal['NORC']);
+    foreach($valor['data'] as &$valor2){
+        $VARIABLE=$valor2['parametro'];
+        $VALOR=(float)$valor2['valor'];
+        $valorsecundario=$fisicoquimicodeta->reg_fisicodeta($IDEMP,$IDGRA,$NORC,$VARIABLE,$VALOR);
+    }
+}
+echo json_encode(array('Success'=>true,'NUMEROS ORDEN GENERADAS'=>$notasNORC));
 }
 
+}
 
 function ArreglarInfoGet($Array) {
   return array_map(function($datoInfo){
+    $fisicoquimicoprin=new fisicoquimiprin_modelo(); 
     $CentroProduccion=$datoInfo['productionCenterId'];
     $Unidades=$datoInfo['productionUnitIds'];
-    $Usuario=$datoInfo['deviceId'];
+    $deviceID=$datoInfo['deviceId'];
+    $usuraio=$fisicoquimicoprin->getDeviceID($deviceID);
     $Parametro=$datoInfo['sensorId'];
+    $ParametroName=$fisicoquimicoprin->getParametroID($Parametro);
     $fecha=date('Y-m-d',$datoInfo['sensorId']);
     $hora=date('H:i:s',$datoInfo['sensorId']);
     $valor=$datoInfo['value'];
-    $arrayRetorno=UnidadesDeProduccion($Unidades,$CentroProduccion,$Parametro,$fecha,$hora,$valor);
+    $arrayRetorno=UnidadesDeProduccion($Unidades,$CentroProduccion,$ParametroName['PARAMETRO'],$fecha,$hora,$valor, $usuraio['USUARIO']);
     return $arrayRetorno;
   },$Array);
   }
 
-  function  UnidadesDeProduccion($Array,$centroProduccio,$parametro,$fecha,$hora,$valor) {
-    return array_map(function($dataInfo) use ($parametro,$fecha,$valor,$hora) {
-    $IDEMP='Prueba';
-    $IDGRA='Prueba';
-    $CODESPA='Prueba';
+  function  UnidadesDeProduccion($Array,$centroProduccio,$parametro,$fecha,$hora,$valor,$Usuario) {
+    return array_map(function($dataInfo) use ($parametro,$centroProduccio,$fecha,$valor,$hora,$Usuario) {
+        $fisicoquimicoprin=new fisicoquimiprin_modelo(); 
+        $informacion=$fisicoquimicoprin->getSMARTWATERCLOUD($centroProduccio,$dataInfo);
+    $IDEMP=$informacion['IDEMP'];
+    $IDGRA=$informacion['IDGRA'];
+    $CODESPA=$informacion['CODESPA'];
     $parametro=$parametro;
     $fecha=$fecha;
     $valor=$valor;
-        return array('IDEMP'=>$IDEMP,'IDGRA'=>$IDGRA,'CODESPA'=>$CODESPA,'parametro'=>$parametro,'fecha'=>$fecha,'hora'=>$hora,'valor'=>$valor);
+        return array('IDEMP'=>$IDEMP,'IDGRA'=>$IDGRA,'CODESPA'=>$CODESPA,'parametro'=>$parametro,'fecha'=>$fecha,'hora'=>$hora,'valor'=>$valor,'usuario'=>$Usuario);
     },$Array);
   }
 ?>

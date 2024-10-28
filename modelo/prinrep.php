@@ -55,6 +55,7 @@ class prinrep_modelo{
 
        $stmt = sqlsrv_query( $this->db, $sql, $params);
         if( $stmt === false) {
+            file_put_contents("Error.txt", sqlsrv_errors());
             die( print_r( sqlsrv_errors(), true) );
         }else{
             return array("UltimoId"=>$valorMaximo,"NORC"=>$valorNORC,"Paso"=>true);
