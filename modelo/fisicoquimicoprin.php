@@ -37,6 +37,18 @@ class fisicoquimiprin_modelo{
         }
         return $this->fisicoquimiprin2[0]['Maximo']+1;
     }
+    public function getSMARTWATERCLOUD($CentroProd,$UnidadMedusa){
+        $sql = "SELECT IDEMP, IDGRA, CODESPA FROM dbo.M2D5_5N3T WHERE ACTIVO = 1 AND IDMEDUSA_CP = '".$CentroProd."' AND UNITID_MEDUSA = '".strval($UnidadMedusa)."' ";
+        $stmt = sqlsrv_query(  $this->db, $sql );
+        if( $stmt === false) {
+            die( print_r( sqlsrv_errors(), true) );
+        }
+        
+        while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
+            array_push($this->fisicoquimiprin2,$row);
+        }
+        return $this->fisicoquimiprin2[0];
+    }
     public function reg_fisicoprin($IDEMP,$IDGRA,$FECHA,$HORA,$CODESPA,$RESPONSABLE,$ANEXO,$OBSERVA,$USUARIO){
   
         $sql = "SELECT MAX(ID) as Maximo FROM APP0_F3Q3_PR3N";

@@ -2,7 +2,7 @@
 //Llamada al modelo del especies
 require_once("modelo/versionapp.php");
 $versionapp=new versionapp(); 
-$versionActual=18;
+$versionActual=19;
 //Validacion para uso de algunas funciones especificas
 if($opcion=='getversion'){
     $infoData=$versionapp->getVersion($versionActual);

@@ -1,10 +1,11 @@
 <?php
-require_once("db/db.php");
+//require_once("db/db.php");
 include 'src/Router/Route.php';
 include 'src/Router/Router.php';
 include 'src/Router/RouteNotFoundException.php';
 //Inicializcion de Ruteo de paginas
 $router = new Router\Router();
+$tokenKey="ef17dc2abf938d93c1638641f46f7a1cbf9e8721";
 $router->add('/usuarios', function () {
     $opcion='getusuarios';
     require_once("controlador/controlusuario.php");
@@ -64,6 +65,11 @@ $router->add('/registro/fisicoquimicos', function () {
 });
 $router->add('/fisicoquimicos/parametros', function () {
     $opcion='getfisicoquimicosparam';
+    require_once("controlador/controladorfisicoquim.php");
+});
+$router->add('/api/fisicoquimicos/registroWebhook', function () {
+    $opcion='registroWebhook';
+    $isAPi=true;
     require_once("controlador/controladorfisicoquim.php");
 });
 $router->add('/reportes/registro', function () {

@@ -1,3 +1,7 @@
 php -s localhost:8080 router.php PARA QUE CORRA
 
 si me da error el sqlsrv revizar odbc
+
+
+KEY Funcion
+ef17dc2abf938d93c1638641f46f7a1cbf9e8721
