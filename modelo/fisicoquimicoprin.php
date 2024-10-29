@@ -30,6 +30,7 @@ class fisicoquimiprin_modelo{
     public function getNumeroNORC($IDEMP,$IDGRA){
         $sql = "SELECT MAX(NORC) as Maximo FROM APP0_F3Q3_PR3N WHERE IDEMP='".strval($IDEMP)."' AND IDGRA='".strval($IDGRA)."'";
         $stmt = sqlsrv_query(  $this->db, $sql );
+        $this->fisicoquimiprin2=array();
         if( $stmt === false) {
             die( print_r( sqlsrv_errors(), true) );
         }
