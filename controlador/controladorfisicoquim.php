@@ -95,7 +95,7 @@ function ArreglarInfoGet($Array) {
     $fecha=date('Y-m-d',$datoInfo['timestamp']);
     $hora=date('H:i:s',$datoInfo['timestamp']);
     $valor=$datoInfo['value'];
-    $arrayRetorno=UnidadesDeProduccion($Unidades,$CentroProduccion,$ParametroName['PARAMETRO'],$fecha,$hora,$valor, $usuraio['USUARIO']);
+    $arrayRetorno=UnidadesDeProduccion($Unidades,$CentroProduccion,$ParametroName['PARAMETRO'],$fecha,$hora,$valor, $usuraio['CEDULA']);
     return $arrayRetorno;
   },$Array);
   }

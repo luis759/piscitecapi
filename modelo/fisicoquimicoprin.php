@@ -55,7 +55,7 @@ class fisicoquimiprin_modelo{
         return $this->fisicoquimiprin3[0];
     }
     public function getDeviceID($userid){
-        $sql = "SELECT USUARIO FROM dbo.ACO_5S5R WHERE ACTIVO = 1 AND CORREO =  '".$userid."' ";
+        $sql = "SELECT CEDULA FROM dbo.ACO_5S5R WHERE ACTIVO = 1 AND CORREO =  '".$userid."' ";
         $stmt = sqlsrv_query(  $this->db, $sql );
         
         $this->fisicoquimiprin=array();
