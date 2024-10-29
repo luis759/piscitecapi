@@ -93,6 +93,7 @@ class fisicoquimiprin_modelo{
             die( print_r( sqlsrv_errors(), true) );
         }
         
+        $this->fisicoquimiprin=array();
         while( $row = sqlsrv_fetch_array( $stmt, SQLSRV_FETCH_ASSOC) ) {
             array_push($this->fisicoquimiprin,$row);
         }
