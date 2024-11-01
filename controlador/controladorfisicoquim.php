@@ -48,13 +48,12 @@ if(isset($data)){
 $arregloCorrecto=[];
 foreach ($dataAcomodada as &$valor) {
     foreach ($valor as &$valor2) {
-        $datausqueda=array_search($valor2['CODESPA'],array_column($arregloCorrecto, 'CODESPA'));
-      
+        $dataBusqueda=$valor2['CODESPA']."-".$valor2['fecha']."-".$valor2['hora'];
+        $datausqueda=array_search($dataBusqueda,array_column($arregloCorrecto, 'dataBusqueda'));
         if(!empty($datausqueda) || $datausqueda===0){
             array_push( $arregloCorrecto[$datausqueda]['data'],$valor2);
         }else{
-        
-            array_push( $arregloCorrecto,array('CODESPA'=>$valor2['CODESPA'],'IDEMP'=>$valor2['IDEMP'],'IDGRA'=>$valor2['IDGRA'],'usuario'=>$valor2['usuario'],'fecha'=>$valor2['fecha'],'hora'=>$valor2['hora'],'data'=>array($valor2)));
+            array_push( $arregloCorrecto,array('dataBusqueda'=>$dataBusqueda,'CODESPA'=>$valor2['CODESPA'],'IDEMP'=>$valor2['IDEMP'],'IDGRA'=>$valor2['IDGRA'],'usuario'=>$valor2['usuario'],'fecha'=>$valor2['fecha'],'hora'=>$valor2['hora'],'data'=>array($valor2)));
         }
     }
 }
