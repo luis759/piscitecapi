@@ -72,8 +72,8 @@ class consumosprin_modelo{
         }
        $valorMaximo=$this->consumos[0]['Maximo']+1;
        $valorNORC=$this->getNumeroNORC($IDEMP,$IDGRA);
-       $sql = "INSERT INTO APP6_C4NS_PR3N ( IDEMP,IDGRA,NORC,FECHA,RESPONSABLE,OBSERVA,USUARIO,TEMPORAL,ACTIVO,VERSIONES) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
-       $params = array( $IDEMP,$IDGRA,$valorNORC,$FECHA,$RESPONSABLE,$OBSERVA,$USUARIO, date("Y-m-d H:i:s"), '1', '1');
+       $sql = "INSERT INTO APP6_C4NS_PR3N ( IDEMP,IDGRA,NORC,FECHA,RESPONSABLE,OBSERVA,USUARIO,TEMPORAL,ACTIVO,VERSIONES) VALUES ( ?, ?, ?, ?, ?, ?, ?,GETDATE(), ?,?)";
+       $params = array( $IDEMP,$IDGRA,$valorNORC,$FECHA,$RESPONSABLE,$OBSERVA,$USUARIO, '1', '1');
 
        $stmt = sqlsrv_query( $this->db, $sql, $params);
         if( $stmt === false) {

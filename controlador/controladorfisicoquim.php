@@ -41,9 +41,9 @@ if (!isset($valorUso) && $opcion=='reg' && !isset($isAPi)){
     $ValorRetorno=array("parametros"=>$paramfis->get_paramfisico());
     echo json_encode($ValorRetorno);
 }else if ($opcion=='registroWebhook' && isset($isAPi)){
-    date_default_timezone_set('America/Bogota');
 header('Content-type: application/json');
 $data = json_decode(file_get_contents('php://input'), true);
+date_default_timezone_set('America/Bogota');
 if(isset($data)){
     $dataAcomodada=ArreglarInfoGet($data);
 $arregloCorrecto=[];

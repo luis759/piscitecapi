@@ -23,7 +23,7 @@ class responsable_modelo{
         $this->responsable2=array();
     }
     public function get_responsable(){
-        $sql = "SELECT * FROM APP0_R2SP WHERE ACTIVO=1";
+        $sql = "SELECT * FROM APP0_R2SP WHERE ACTIVO=1 AND Vigente = 1";
         $stmt = sqlsrv_query(  $this->db, $sql );
         if( $stmt === false) {
             die( print_r( sqlsrv_errors(), true) );
@@ -85,8 +85,8 @@ class responsable_modelo{
                     }
                 $valorMaximo=$this->responsable[0]['Maximo']+1;
                 $valorCodigo=$this->responsable2[0]['COD'];
-                $sql = "INSERT INTO APP0_R2SP (ID,IDEMP,COD,CEDULA,Nombres,Vigente,usuario,Activo,TEMPORAL,VERSIONES) VALUES ( ?,?,?,?,?,?,?,?,?,?)";
-                $params = array($valorMaximo,$IDEMP,$valorCodigo,$CEDULA,$NOMBRES,1,$USUARIO,1,date("Y-m-d H:i:s"),1);
+                $sql = "INSERT INTO APP0_R2SP (ID,IDEMP,COD,CEDULA,Nombres,Vigente,usuario,Activo,TEMPORAL,VERSIONES) VALUES ( ?,?,?,?,?,?,?,?,GETDATE(),?)";
+                $params = array($valorMaximo,$IDEMP,$valorCodigo,$CEDULA,$NOMBRES,1,$USUARIO,1,1);
      
                 $stmt = sqlsrv_query( $this->db, $sql, $params);
                  if( $stmt === false) {
